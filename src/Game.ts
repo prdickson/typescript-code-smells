@@ -25,35 +25,16 @@ export class Game {
     }
 
     public Winner() : Symbol {
-        if (this._board.SymbolAt(0, 0) != ' ' &&
-                this._board.SymbolAt(0, 1) != ' ' &&
-                this._board.SymbolAt(0, 2) != ' ') {
-            if (this._board.SymbolAt(0, 0) ==
-                    this._board.SymbolAt(0, 1) &&
-                    this._board.SymbolAt(0, 2) == this._board.SymbolAt(0, 1)) {
-                return this._board.SymbolAt(0, 0);
-            }
-        }
 
-        if (this._board.SymbolAt(1, 0) != ' ' &&
-                this._board.SymbolAt(1, 1) != ' ' &&
-                this._board.SymbolAt(1, 2) != ' ') {
-            if (this._board.SymbolAt(1, 0) ==
-                    this._board.SymbolAt(1, 1) &&
-                    this._board.SymbolAt(1, 2) ==
-                            this._board.SymbolAt(1, 1)) {
-                return this._board.SymbolAt(1, 0);
-            }
-        }
-
-        if (this._board.SymbolAt(2, 0) != ' ' &&
-                this._board.SymbolAt(2, 1) != ' ' &&
-                this._board.SymbolAt(2, 2) != ' ') {
-            if (this._board.SymbolAt(2, 0) ==
-                    this._board.SymbolAt(2, 1) &&
-                    this._board.SymbolAt(2, 2) ==
-                            this._board.SymbolAt(2, 1)) {
-                return this._board.SymbolAt(2, 0);
+        for (let i = 0; i < 3; i++) {
+            if (this._board.SymbolAt(i, 0) != ' ' &&
+                this._board.SymbolAt(i, 1) != ' ' &&
+                this._board.SymbolAt(i, 2) != ' ') {
+                if (this._board.SymbolAt(i, 0) ==
+                        this._board.SymbolAt(i, 1) &&
+                        this._board.SymbolAt(i, 2) == this._board.SymbolAt(i, 1)) {
+                    return this._board.SymbolAt(i, 0);
+                }
             }
         }
 
