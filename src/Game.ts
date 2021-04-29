@@ -25,7 +25,7 @@ export class Game {
     }
 
     public Winner() : Symbol {
-        if (this._board.TileAt(0, 0)!.Symbol != ' ' &&
+        if (this._board.TileAt(0, 0).Symbol != ' ' &&
                 this._board.TileAt(0, 1)!.Symbol != ' ' &&
                 this._board.TileAt(0, 2)!.Symbol != ' ') {
             if (this._board.TileAt(0, 0)!.Symbol ==
@@ -84,7 +84,7 @@ class Board
         }
     }
 
-    public TileAt(x:  number, y: number): Tile {
+    public TileAt(x: number, y: number): Tile {
         return this._plays.find((t:Tile) => t.X == x && t.Y == y)!
     }
 

@@ -102,4 +102,8 @@ describe('TicTacToe game', () => {
         
         expect(winner).toBe("O");
     });
+
+    it('should throw error when player picks an out of bound position', () => {
+      expect(() => game.Play('X', 0, 3)).toThrowError('blah');
+    })
 });
