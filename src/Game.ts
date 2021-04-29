@@ -7,26 +7,25 @@ export class Game {
         if (firstMove && symbol === 'O') {
             throw new Error("Invalid first player");
         }
-        //if not first move but player repeated
-        if (symbol == this._lastSymbol) {
+
+        const repeatedMove = symbol === this._lastSymbol;
+        if (repeatedMove) {
             throw new Error("Invalid next player");
         }
-        //if not first move but play on an already played tile
-        else if (this._board.TileAt(x, y).Symbol != ' ') {
+
+        const tileUsed = this._board.TileAt(x, y).Symbol !== ' ';
+        if (tileUsed) {
             throw new Error("Invalid position");
         }
 
-        // update game state
         this._lastSymbol = symbol;
         this._board.AddTileAt(symbol, x, y);
     }
 
     public Winner() : string {
-        //if the positions in first row are taken
         if (this._board.TileAt(0, 0)!.Symbol != ' ' &&
                 this._board.TileAt(0, 1)!.Symbol != ' ' &&
                 this._board.TileAt(0, 2)!.Symbol != ' ') {
-            //if first row is full with same symbol
             if (this._board.TileAt(0, 0)!.Symbol ==
                     this._board.TileAt(0, 1)!.Symbol &&
                     this._board.TileAt(0, 2)!.Symbol == this._board.TileAt(0, 1)!.Symbol) {
@@ -34,11 +33,9 @@ export class Game {
             }
         }
 
-        //if the positions in first row are taken
         if (this._board.TileAt(1, 0)!.Symbol != ' ' &&
                 this._board.TileAt(1, 1)!.Symbol != ' ' &&
                 this._board.TileAt(1, 2)!.Symbol != ' ') {
-            //if middle row is full with same symbol
             if (this._board.TileAt(1, 0)!.Symbol ==
                     this._board.TileAt(1, 1)!.Symbol &&
                     this._board.TileAt(1, 2)!.Symbol ==
@@ -47,11 +44,9 @@ export class Game {
             }
         }
 
-        //if the positions in first row are taken
         if (this._board.TileAt(2, 0)!.Symbol != ' ' &&
                 this._board.TileAt(2, 1)!.Symbol != ' ' &&
                 this._board.TileAt(2, 2)!.Symbol != ' ') {
-            //if middle row is full with same symbol
             if (this._board.TileAt(2, 0)!.Symbol ==
                     this._board.TileAt(2, 1)!.Symbol &&
                     this._board.TileAt(2, 2)!.Symbol ==
