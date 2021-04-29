@@ -8,13 +8,13 @@ export class Game {
         this.ValidateMove(symbol);
 
         this._lastSymbol = symbol;
-        this._board.AddTileAt(symbol, x, y);
+        this._board.AddTileAt(symbol, {X: x, Y: y});
     }
 
     public Winner() : Symbol {
         for (let i = 0; i < this._board.size; i++) {
             if (this._board.isRowFilledByPlayer(i)) {
-                return this._board.SymbolAt(i, 0);
+                return this._board.SymbolAt({X: i, Y: 0});
             }
         }
 
@@ -34,10 +34,13 @@ export class Game {
     }
 }
 
+type Coordinates = {
+    X: number;
+    Y: number
+}
 interface Tile
 {
-    X: number;
-    Y: number;
+    Coordinates: Coordinates;
     Symbol: Symbol;
 }
 
@@ -51,14 +54,21 @@ class Board
         {
             for (let j = 0; j < this.size; j++)
             {
-                const tile : Tile = {X :i, Y:j, Symbol:" "};
+                const tile: Tile = {
+                    Coordinates: {
+                        X : i,
+                        Y: j
+                    },
+                    Symbol:" "
+                };
+
                 this._plays.push(tile);
             }
         }
     }
 
-    private TileAt(x:number, y: number): Tile {
-        const tile = this._plays.find((t:Tile) => t.X == x && t.Y == y);
+    private TileAt({X, Y }: Coordinates): Tile {
+        const tile = this._plays.find((t:Tile) => t.Coordinates.X == X && t.Coordinates.Y == Y);
 
         if (!tile)
             throw new Error("Invalid Tile");
@@ -68,17 +78,17 @@ class Board
 
     public isRowFilledByPlayer(row: number): boolean {
         return [...Array(this.size - 1).keys()].reduce((acc, _, column) => {
-            return acc && this.SymbolAt(row, column) === this.SymbolAt(row, column + 1)
-        }, true) && this.SymbolAt(row, 0) !== ' ';
+            return acc && this.SymbolAt({X:row, Y: column}) === this.SymbolAt({X: row, Y: column + 1})
+        }, true) && this.SymbolAt({X: row, Y: 0}) !== ' ';
     }
 
-    public SymbolAt(x: number, y: number): Symbol {
-        return this.TileAt(x,y).Symbol;
+    public SymbolAt(coordinate: Coordinates): Symbol {
+        return this.TileAt(coordinate).Symbol;
     }
 
-    public AddTileAt(symbol: Symbol, x: number, y: number) : void
+    public AddTileAt(symbol: Symbol, coordinaate: Coordinates) : void
     {
-        const tile = this.TileAt(x, y);
+        const tile = this.TileAt(coordinaate);
         if (tile.Symbol !== ' ') {
             throw new Error("Invalid position");
         }
