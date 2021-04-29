@@ -8,7 +8,7 @@ export class Game {
             throw new Error("Invalid first player");
         }
         //if not first move but player repeated
-        else if (symbol == this._lastSymbol) {
+        if (symbol == this._lastSymbol) {
             throw new Error("Invalid next player");
         }
         //if not first move but play on an already played tile
