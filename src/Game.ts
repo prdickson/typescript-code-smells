@@ -26,34 +26,34 @@ export class Game {
 
     public Winner() : Symbol {
         if (this._board.TileAt(0, 0).Symbol != ' ' &&
-                this._board.TileAt(0, 1)!.Symbol != ' ' &&
-                this._board.TileAt(0, 2)!.Symbol != ' ') {
-            if (this._board.TileAt(0, 0)!.Symbol ==
-                    this._board.TileAt(0, 1)!.Symbol &&
-                    this._board.TileAt(0, 2)!.Symbol == this._board.TileAt(0, 1)!.Symbol) {
-                return this._board.TileAt(0, 0)!.Symbol;
+                this._board.TileAt(0, 1).Symbol != ' ' &&
+                this._board.TileAt(0, 2).Symbol != ' ') {
+            if (this._board.TileAt(0, 0).Symbol ==
+                    this._board.TileAt(0, 1).Symbol &&
+                    this._board.TileAt(0, 2).Symbol == this._board.TileAt(0, 1).Symbol) {
+                return this._board.TileAt(0, 0).Symbol;
             }
         }
 
-        if (this._board.TileAt(1, 0)!.Symbol != ' ' &&
-                this._board.TileAt(1, 1)!.Symbol != ' ' &&
-                this._board.TileAt(1, 2)!.Symbol != ' ') {
-            if (this._board.TileAt(1, 0)!.Symbol ==
-                    this._board.TileAt(1, 1)!.Symbol &&
-                    this._board.TileAt(1, 2)!.Symbol ==
-                            this._board.TileAt(1, 1)!.Symbol) {
-                return this._board.TileAt(1, 0)!.Symbol;
+        if (this._board.TileAt(1, 0).Symbol != ' ' &&
+                this._board.TileAt(1, 1).Symbol != ' ' &&
+                this._board.TileAt(1, 2).Symbol != ' ') {
+            if (this._board.TileAt(1, 0).Symbol ==
+                    this._board.TileAt(1, 1).Symbol &&
+                    this._board.TileAt(1, 2).Symbol ==
+                            this._board.TileAt(1, 1).Symbol) {
+                return this._board.TileAt(1, 0).Symbol;
             }
         }
 
-        if (this._board.TileAt(2, 0)!.Symbol != ' ' &&
-                this._board.TileAt(2, 1)!.Symbol != ' ' &&
-                this._board.TileAt(2, 2)!.Symbol != ' ') {
-            if (this._board.TileAt(2, 0)!.Symbol ==
-                    this._board.TileAt(2, 1)!.Symbol &&
-                    this._board.TileAt(2, 2)!.Symbol ==
-                            this._board.TileAt(2, 1)!.Symbol) {
-                return this._board.TileAt(2, 0)!.Symbol;
+        if (this._board.TileAt(2, 0).Symbol != ' ' &&
+                this._board.TileAt(2, 1).Symbol != ' ' &&
+                this._board.TileAt(2, 2).Symbol != ' ') {
+            if (this._board.TileAt(2, 0).Symbol ==
+                    this._board.TileAt(2, 1).Symbol &&
+                    this._board.TileAt(2, 2).Symbol ==
+                            this._board.TileAt(2, 1).Symbol) {
+                return this._board.TileAt(2, 0).Symbol;
             }
         }
 
