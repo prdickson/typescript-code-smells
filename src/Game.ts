@@ -15,7 +15,7 @@ export class Game {
             throw new Error("Invalid next player");
         }
 
-        const tileUsed = this._board.TileAt(x, y).Symbol !== ' ';
+        const tileUsed = this._board.SymbolAt(x, y) !== ' ';
         if (tileUsed) {
             throw new Error("Invalid position");
         }
@@ -25,35 +25,35 @@ export class Game {
     }
 
     public Winner() : Symbol {
-        if (this._board.TileAt(0, 0).Symbol != ' ' &&
-                this._board.TileAt(0, 1).Symbol != ' ' &&
-                this._board.TileAt(0, 2).Symbol != ' ') {
-            if (this._board.TileAt(0, 0).Symbol ==
-                    this._board.TileAt(0, 1).Symbol &&
-                    this._board.TileAt(0, 2).Symbol == this._board.TileAt(0, 1).Symbol) {
-                return this._board.TileAt(0, 0).Symbol;
+        if (this._board.SymbolAt(0, 0) != ' ' &&
+                this._board.SymbolAt(0, 1) != ' ' &&
+                this._board.SymbolAt(0, 2) != ' ') {
+            if (this._board.SymbolAt(0, 0) ==
+                    this._board.SymbolAt(0, 1) &&
+                    this._board.SymbolAt(0, 2) == this._board.SymbolAt(0, 1)) {
+                return this._board.SymbolAt(0, 0);
             }
         }
 
-        if (this._board.TileAt(1, 0).Symbol != ' ' &&
-                this._board.TileAt(1, 1).Symbol != ' ' &&
-                this._board.TileAt(1, 2).Symbol != ' ') {
-            if (this._board.TileAt(1, 0).Symbol ==
-                    this._board.TileAt(1, 1).Symbol &&
-                    this._board.TileAt(1, 2).Symbol ==
-                            this._board.TileAt(1, 1).Symbol) {
-                return this._board.TileAt(1, 0).Symbol;
+        if (this._board.SymbolAt(1, 0) != ' ' &&
+                this._board.SymbolAt(1, 1) != ' ' &&
+                this._board.SymbolAt(1, 2) != ' ') {
+            if (this._board.SymbolAt(1, 0) ==
+                    this._board.SymbolAt(1, 1) &&
+                    this._board.SymbolAt(1, 2) ==
+                            this._board.SymbolAt(1, 1)) {
+                return this._board.SymbolAt(1, 0);
             }
         }
 
-        if (this._board.TileAt(2, 0).Symbol != ' ' &&
-                this._board.TileAt(2, 1).Symbol != ' ' &&
-                this._board.TileAt(2, 2).Symbol != ' ') {
-            if (this._board.TileAt(2, 0).Symbol ==
-                    this._board.TileAt(2, 1).Symbol &&
-                    this._board.TileAt(2, 2).Symbol ==
-                            this._board.TileAt(2, 1).Symbol) {
-                return this._board.TileAt(2, 0).Symbol;
+        if (this._board.SymbolAt(2, 0) != ' ' &&
+                this._board.SymbolAt(2, 1) != ' ' &&
+                this._board.SymbolAt(2, 2) != ' ') {
+            if (this._board.SymbolAt(2, 0) ==
+                    this._board.SymbolAt(2, 1) &&
+                    this._board.SymbolAt(2, 2) ==
+                            this._board.SymbolAt(2, 1)) {
+                return this._board.SymbolAt(2, 0);
             }
         }
 
@@ -84,13 +84,17 @@ class Board
         }
     }
 
-    public TileAt(x: number, y: number): Tile {
+    private TileAt(x:number, y: number): Tile {
         const tile = this._plays.find((t:Tile) => t.X == x && t.Y == y);
 
         if (!tile)
             throw new Error("Invalid Tile");
 
         return tile;
+    }
+
+    public SymbolAt(x: number, y: number): Symbol {
+        return this.TileAt(x,y).Symbol;
     }
 
     public AddTileAt(symbol: Symbol, x: number, y: number) : void
