@@ -25,16 +25,9 @@ export class Game {
     }
 
     public Winner() : Symbol {
-
         for (let i = 0; i < 3; i++) {
-            if (this._board.SymbolAt(i, 0) != ' ' &&
-                this._board.SymbolAt(i, 1) != ' ' &&
-                this._board.SymbolAt(i, 2) != ' ') {
-                if (this._board.SymbolAt(i, 0) ==
-                        this._board.SymbolAt(i, 1) &&
-                        this._board.SymbolAt(i, 2) == this._board.SymbolAt(i, 1)) {
-                    return this._board.SymbolAt(i, 0);
-                }
+            if (this._board.isRowFilledByPlayer(i)) {
+                return this._board.SymbolAt(i, 0);
             }
         }
 
@@ -72,6 +65,13 @@ class Board
             throw new Error("Invalid Tile");
 
         return tile;
+    }
+
+    public isRowFilledByPlayer(row: number): boolean {
+        return this.SymbolAt(row, 0) ==
+          this.SymbolAt(row, 1) &&
+          this.SymbolAt(row, 2) == this.SymbolAt(row, 1) &&
+          this.SymbolAt(row, 0) !== ' ';
     }
 
     public SymbolAt(x: number, y: number): Symbol {
