@@ -2,7 +2,7 @@ type Symbol = "X" | "O" | " "
 
 export class Game {
     private _lastSymbol: Symbol = ' ';
-    private _board: Board = new Board();
+    private _board: Board = new Board(3);
 
     public Play(symbol: Symbol, x: number, y: number) : void {
         const firstMove = this._lastSymbol === ' ';
@@ -25,7 +25,7 @@ export class Game {
     }
 
     public Winner() : Symbol {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < this._board.size; i++) {
             if (this._board.isRowFilledByPlayer(i)) {
                 return this._board.SymbolAt(i, 0);
             }
@@ -46,11 +46,11 @@ class Board
 {
     private _plays : Tile[] = [];
 
-    constructor()
+    constructor(readonly size: number)
     {
-        for (let i = 0; i < 3; i++)
+        for (let i = 0; i < this.size; i++)
         {
-            for (let j = 0; j < 3; j++)
+            for (let j = 0; j < this.size; j++)
             {
                 const tile : Tile = {X :i, Y:j, Symbol:" "};
                 this._plays.push(tile);
@@ -68,10 +68,9 @@ class Board
     }
 
     public isRowFilledByPlayer(row: number): boolean {
-        return this.SymbolAt(row, 0) ==
-          this.SymbolAt(row, 1) &&
-          this.SymbolAt(row, 2) == this.SymbolAt(row, 1) &&
-          this.SymbolAt(row, 0) !== ' ';
+        return [...Array(this.size - 1).keys()].reduce((acc, _, column) => {
+            return acc && this.SymbolAt(row, column) === this.SymbolAt(row, column + 1)
+        }, true) && this.SymbolAt(row, 0) !== ' ';
     }
 
     public SymbolAt(x: number, y: number): Symbol {
