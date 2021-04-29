@@ -3,12 +3,9 @@ export class Game {
     private _board: Board = new Board();
 
     public Play(symbol: string, x: number, y: number) : void {
-        //if first move
-        if (this._lastSymbol == ' ') {
-            //if player is X
-            if (symbol == 'O') {
-                throw new Error("Invalid first player");
-            }
+        const firstMove = this._lastSymbol === ' ';
+        if (firstMove && symbol === 'O') {
+            throw new Error("Invalid first player");
         }
         //if not first move but player repeated
         else if (symbol == this._lastSymbol) {
