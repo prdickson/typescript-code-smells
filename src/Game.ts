@@ -5,20 +5,7 @@ export class Game {
     private _board: Board = new Board(3);
 
     public Play(symbol: Symbol, x: number, y: number) : void {
-        const firstMove = this._lastSymbol === ' ';
-        if (firstMove && symbol === 'O') {
-            throw new Error("Invalid first player");
-        }
-
-        const repeatedMove = symbol === this._lastSymbol;
-        if (repeatedMove) {
-            throw new Error("Invalid next player");
-        }
-
-        const tileUsed = this._board.SymbolAt(x, y) !== ' ';
-        if (tileUsed) {
-            throw new Error("Invalid position");
-        }
+        this.ValidateMove(symbol);
 
         this._lastSymbol = symbol;
         this._board.AddTileAt(symbol, x, y);
@@ -32,6 +19,18 @@ export class Game {
         }
 
         return ' ';
+    }
+
+    private ValidateMove (symbol: Symbol) {
+        const firstMove = this._lastSymbol === ' ';
+        if (firstMove && symbol === 'O') {
+            throw new Error("Invalid first player");
+        }
+
+        const repeatedMove = symbol === this._lastSymbol;
+        if (repeatedMove) {
+            throw new Error("Invalid next player");
+        }
     }
 }
 
@@ -79,6 +78,10 @@ class Board
 
     public AddTileAt(symbol: Symbol, x: number, y: number) : void
     {
-        this.TileAt(x, y).Symbol = symbol;
+        const tile = this.TileAt(x, y);
+        if (tile.Symbol !== ' ') {
+            throw new Error("Invalid position");
+        }
+        tile.Symbol = symbol;
     }
 }
